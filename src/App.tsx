@@ -1,10 +1,9 @@
-import BackgroundImg from './assets/bg-mobile-light.jpg'
 import CreateTodo from './components/CreateTodo'
 import Navbar from './components/Navbar'
 
+import BackgroundImg from './assets/bg-mobile-light.jpg'
 
 const App = () => {
-
   return (
     <section className="w-full h-screen">
       <div className="h-[30%] w-full absolute bg-red-200 -z-10">
@@ -12,7 +11,7 @@ const App = () => {
       </div>
       <div className='w-[90%] mx-auto'>
         <Navbar />
-        {/* <CreateTodo /> */}
+        <CreateTodo />
       </div>
     </section>
   )
