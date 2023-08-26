@@ -7,6 +7,7 @@ import Todos from './components/TodoList'
 import BackgroundImg from './assets/bg-mobile-light.jpg'
 import SingleTodo from './components/TodoList'
 import TodoList from './components/TodoList'
+import BottomNav from './components/BottomNav'
 
 const fakeTodos: Todo[] = [
   {
@@ -32,9 +33,8 @@ const App = () => {
       <div className='w-[90%] mx-auto'>
         <Navbar />
         <CreateTodo />
-
         <TodoList todos={todos} />
-
+        <BottomNav />
       </div>
     </section>
   )

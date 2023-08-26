@@ -5,21 +5,26 @@ type TodoBarProps = {
     todo?: Todo;
 }
 
+const classNames = {
+    container: "flex items-center w-full px-6 py-4 bg-white rounded-md",
+    checkbox: "w-8 h-8 border border-gray-300 rounded-full cursor-pointer",
+    text: "ml-4 text-lg w-[85%]"
+}
 
 const TodoBar = ({ todo }: TodoBarProps) => {
     if (!todo) {
         return (
-            <form className="flex items-center w-full px-6 py-4 bg-white rounded-md ">
-                <div className="w-8 h-8 border border-gray-300 rounded-full cursor-pointer" />
-                <input type="text" placeholder="Create a new todo..." className="w-[85%] ml-4 text-lg outline-none " />
+            <form className={classNames.container}>
+                <div className={classNames.checkbox} />
+                <input type="text" placeholder="Create a new todo..." className={`${classNames.text} outline-none`} />
             </form>
         )
     }
 
     return (
-        <div className="flex items-center w-full px-6 py-4 bg-white rounded-md">
-            <div className="w-8 h-8 border border-gray-300 rounded-full cursor-pointer" />
-            <div className="ml-4 text-lg w-[85%] truncate outline-none ">{todo.title}</div>
+        <div className={classNames.container}>
+            <div className={classNames.checkbox} />
+            <div className={`${classNames.text} truncate`}>{todo.title}</div>
             <img src={CrossIcon} alt='remove' className='cursor-pointer' />
         </div>
     )
