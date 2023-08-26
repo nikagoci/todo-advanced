@@ -27,7 +27,7 @@ const App = () => {
       <Background />
       <div className='w-[90%] mx-auto'>
         <Navbar />
-        <CreateTodo />
+        <CreateTodo setTodos={setTodos} />
         <TodoList todos={todos} />
         <BottomNav />
       </div>

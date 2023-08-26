@@ -1,33 +1,53 @@
-import CrossIcon from '../../assets/icon-cross.svg'
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 
+import CrossIcon from "../../assets/icon-cross.svg";
+import CheckIcon from "../../assets/icon-check.svg"
 
 type TodoBarProps = {
-    todo?: Todo;
-}
+  todo?: Todo;
+  submitHandler?: (e: FormEvent<HTMLFormElement>, value: string, isChecked: boolean, setInputValue: Dispatch<SetStateAction<string>>, setIsChecked: Dispatch<SetStateAction<boolean>>) => void;
+};
 
 const classNames = {
-    container: "flex items-center w-full px-6 py-4 bg-white rounded-md",
-    checkbox: "w-8 h-8 border border-gray-300 rounded-full cursor-pointer",
-    text: "ml-4 text-lg w-[85%]"
-}
+  container: "flex items-center w-full px-6 py-4 bg-white rounded-md",
+  checkbox: "w-8 h-8 border border-gray-300 rounded-full cursor-pointer",
+  text: "ml-4 text-lg w-[85%]",
+  "checkbox-checked": "from-[hsl(192,100%,67%)] flex justify-center items-center bg-gradient-to-br to-[hsl(280,87%,65%)]"
+};
 
-const TodoBar = ({ todo }: TodoBarProps) => {
-    if (!todo) {
-        return (
-            <form className={classNames.container}>
-                <div className={classNames.checkbox} />
-                <input type="text" placeholder="Create a new todo..." className={`${classNames.text} outline-none`} />
-            </form>
-        )
-    }
+const TodoBar = ({ todo, submitHandler }: TodoBarProps) => {
+  const [inputValue, setInputValue] = useState("");
+  const [isChecked, setIsChecked] = useState(false)
 
+  if (!todo && submitHandler) {
     return (
-        <div className={classNames.container}>
-            <div className={classNames.checkbox} />
-            <div className={`${classNames.text} truncate`}>{todo.title}</div>
-            <img src={CrossIcon} alt='remove' className='cursor-pointer' />
-        </div>
-    )
-}
+      <form onSubmit={(e) => submitHandler(e, inputValue, isChecked, setInputValue, setIsChecked)} className={classNames.container}>
+        {isChecked ? (
+          <div className={`${classNames.checkbox} ${classNames["checkbox-checked"]}`} onClick={() => setIsChecked(prev => !prev)} >
+            <img src={CheckIcon} alt='check' />
+          </div>
+        ) : (
+          <div className={classNames.checkbox} onClick={() => setIsChecked(prev => !prev)} />
+        )}
 
-export default TodoBar
+        <input
+          type="text"
+          placeholder="Create a new todo..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          className={`${classNames.text} outline-none`}
+        />
+      </form>
+    );
+  }
+
+  return (
+    <div className={classNames.container}>
+      <div className={classNames.checkbox} />
+      <div className={`${classNames.text} truncate`}>{todo?.title}</div>
+      <img src={CrossIcon} alt="remove" className="cursor-pointer" />
+    </div>
+  );
+};
+
+export default TodoBar;
