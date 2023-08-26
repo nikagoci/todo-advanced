@@ -7,7 +7,7 @@ type TodoListProps = {
 const TodoList = ({ todos }: TodoListProps) => {
   return (
 
-    <div className='mt-10 rounded-md shadow-lg'>
+    <div className='mt-10 rounded-md shadow-lg md:w-[50%] md:mx-auto'>
       {todos.map(todo => (
         <div key={todo.id} className="border-b ">
           <TodoBar todo={todo} />
