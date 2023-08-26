@@ -1,11 +1,13 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 
+import { removeTodoHandler, stateChangeHandler } from "../../libs/todo-crud";
 import CrossIcon from "../../assets/icon-cross.svg";
 import CheckIcon from "../../assets/icon-check.svg"
 
 type TodoBarProps = {
   todo?: Todo;
   submitHandler?: (e: FormEvent<HTMLFormElement>, value: string, isChecked: boolean, setInputValue: Dispatch<SetStateAction<string>>, setIsChecked: Dispatch<SetStateAction<boolean>>) => void;
+  setTodos: Dispatch<SetStateAction<Todo[]>>
 };
 
 const classNames = {
@@ -15,7 +17,7 @@ const classNames = {
   "checkbox-checked": "from-[hsl(192,100%,67%)] flex justify-center items-center bg-gradient-to-br to-[hsl(280,87%,65%)]"
 };
 
-const TodoBar = ({ todo, submitHandler }: TodoBarProps) => {
+const TodoBar = ({ todo, submitHandler, setTodos }: TodoBarProps) => {
   const [inputValue, setInputValue] = useState("");
   const [isChecked, setIsChecked] = useState(false)
 
@@ -43,9 +45,16 @@ const TodoBar = ({ todo, submitHandler }: TodoBarProps) => {
 
   return (
     <div className={classNames.container}>
-      <div className={classNames.checkbox} />
+      {todo?.state === 'active' ? (
+        <div className={classNames.checkbox} onClick={() => stateChangeHandler({setTodos, todo})} />
+      ) : (
+        <div className={`${classNames.checkbox} ${classNames["checkbox-checked"]}`} onClick={() => stateChangeHandler({setTodos, todo})} >
+          <img src={CheckIcon} alt='check' />
+        </div>
+      )}
+
       <div className={`${classNames.text} truncate`}>{todo?.title}</div>
-      <img src={CrossIcon} alt="remove" className="cursor-pointer" />
+      <img src={CrossIcon} alt="remove" className="cursor-pointer" onClick={() => removeTodoHandler({setTodos, todo})} />
     </div>
   );
 };

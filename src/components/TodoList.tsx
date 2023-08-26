@@ -1,16 +1,18 @@
+import { Dispatch, SetStateAction } from "react"
 import TodoBar from "./ui/TodoBar"
 
 type TodoListProps = {
   todos: Todo[]
+  setTodos: Dispatch<SetStateAction<Todo[]>>
 }
 
-const TodoList = ({ todos }: TodoListProps) => {
+const TodoList = ({ todos, setTodos }: TodoListProps) => {
   return (
 
     <div className='mt-10 rounded-md shadow-lg md:w-[50%] md:mx-auto'>
       {todos.map(todo => (
         <div key={todo.id} className="border-b ">
-          <TodoBar todo={todo} />
+          <TodoBar todo={todo} setTodos={setTodos} />
         </div>
       ))}
       <div className="flex justify-between px-6 py-6 text-sm text-gray-400 bg-white rounded-md ">

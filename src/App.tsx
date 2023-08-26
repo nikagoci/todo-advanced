@@ -28,7 +28,7 @@ const App = () => {
       <div className='w-[90%] mx-auto'>
         <Navbar />
         <CreateTodo setTodos={setTodos} />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} setTodos={setTodos} />
         <BottomNav />
       </div>
     </section>
