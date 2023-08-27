@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction } from "react";
 
 type TodoProps = {
   setTodos: Dispatch<SetStateAction<Todo[]>>;
-  todo: Todo | undefined;
+  todo: Todo;
 };
 
 export const stateChangeHandler = ({ setTodos, todo }: TodoProps) => {
   setTodos((prev) => {
     const updatedTodos: Todo[] = prev.map((t) => {
-      if (t.id === todo?.id) {
+      if (t.id === todo.id) {
         return {
           title: t.title,
           state: t.state === "active" ? "completed" : "active",
@@ -24,5 +24,5 @@ export const stateChangeHandler = ({ setTodos, todo }: TodoProps) => {
 };
 
 export const removeTodoHandler = ({ setTodos, todo }: TodoProps) => {
-  setTodos((prev) => prev.filter((t) => t.id !== todo?.id));
+  setTodos((prev) => prev.filter((t) => t.id !== todo.id));
 };

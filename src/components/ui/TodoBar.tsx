@@ -43,9 +43,11 @@ const TodoBar = ({ todo, submitHandler, setTodos }: TodoBarProps) => {
     );
   }
 
+  if(!todo) return;
+
   return (
     <div className={classNames.container}>
-      {todo?.state === 'active' ? (
+      {todo.state === 'active' ? (
         <div className={classNames.checkbox} onClick={() => stateChangeHandler({setTodos, todo})} />
       ) : (
         <div className={`${classNames.checkbox} ${classNames["checkbox-checked"]}`} onClick={() => stateChangeHandler({setTodos, todo})} >
@@ -53,7 +55,7 @@ const TodoBar = ({ todo, submitHandler, setTodos }: TodoBarProps) => {
         </div>
       )}
 
-      <div className={`${classNames.text} truncate`}>{todo?.title}</div>
+      <div className={`${classNames.text} truncate`}>{todo.title}</div>
       <img src={CrossIcon} alt="remove" className="cursor-pointer" onClick={() => removeTodoHandler({setTodos, todo})} />
     </div>
   );
