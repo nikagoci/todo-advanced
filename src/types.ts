@@ -3,3 +3,6 @@ type Todo = {
     state: "active" | "completed",
     id: string;
 }
+
+
+type ActiveStatus = "all" | "active" |"completed"

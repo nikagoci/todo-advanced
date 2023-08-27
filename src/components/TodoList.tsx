@@ -5,17 +5,15 @@ import { clearCompletedTodosHandler } from "../libs/todo-crud"
 type TodoListProps = {
   todos: Todo[]
   setTodos: Dispatch<SetStateAction<Todo[]>>
+  curActive: ActiveStatus
 }
 
-const TodoList = ({ todos, setTodos }: TodoListProps) => {
+const TodoList = ({ todos, setTodos, curActive }: TodoListProps) => {
   const itemsLeft = todos.filter((todo) => todo.state === 'active');
 
-  
-
   return (
-
     <div className='mt-10 rounded-md shadow-lg md:w-[50%] md:mx-auto'>
-      {todos.map(todo => (
+      {todos.filter(todo => curActive === 'all' ? todo : todo.state === curActive ).map(todo => (
         <div key={todo.id} className="border-b ">
           <TodoBar todo={todo} setTodos={setTodos} />
         </div>

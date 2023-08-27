@@ -21,15 +21,20 @@ const fakeTodos: Todo[] = [
 
 const App = () => {
   const [todos, setTodos] = useState(fakeTodos)
+  const [ curActive, setCurActive ] = useState<ActiveStatus>("all")
+ 
+  const getActiveStatus = (active: ActiveStatus) => {
+    setCurActive(active)
+  }
 
   return (
-    <section className="w-full h-screen">
+    <section className="w-full">
       <Background />
       <div className='w-[90%] mx-auto'>
         <Navbar />
         <CreateTodo setTodos={setTodos} />
-        <TodoList todos={todos} setTodos={setTodos} />
-        <BottomNav />
+        <TodoList todos={todos} setTodos={setTodos} curActive={curActive} />
+        <BottomNav getActiveStatus={getActiveStatus} />
       </div>
     </section>
   )
