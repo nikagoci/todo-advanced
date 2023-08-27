@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 
+type SetTodosType = Dispatch<SetStateAction<Todo[]>>;
+
+
 type TodoProps = {
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
+  setTodos: SetTodosType
   todo: Todo;
 };
 
@@ -26,3 +29,7 @@ export const stateChangeHandler = ({ setTodos, todo }: TodoProps) => {
 export const removeTodoHandler = ({ setTodos, todo }: TodoProps) => {
   setTodos((prev) => prev.filter((t) => t.id !== todo.id));
 };
+
+export const clearCompletedTodosHandler = ({setTodos}: { setTodos: SetTodosType}) => {
+  setTodos(prev => prev.filter(todo => todo.state === 'active'))
+}

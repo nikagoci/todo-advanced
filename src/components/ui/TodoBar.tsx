@@ -7,7 +7,7 @@ import CheckIcon from "../../assets/icon-check.svg"
 type TodoBarProps = {
   todo?: Todo;
   submitHandler?: (e: FormEvent<HTMLFormElement>, value: string, isChecked: boolean, setInputValue: Dispatch<SetStateAction<string>>, setIsChecked: Dispatch<SetStateAction<boolean>>) => void;
-  setTodos: Dispatch<SetStateAction<Todo[]>>
+  setTodos?: Dispatch<SetStateAction<Todo[]>>
 };
 
 const classNames = {
@@ -43,7 +43,7 @@ const TodoBar = ({ todo, submitHandler, setTodos }: TodoBarProps) => {
     );
   }
 
-  if(!todo) return;
+  if(!todo || !setTodos) return;
 
   return (
     <div className={classNames.container}>
