@@ -6,3 +6,5 @@ type Todo = {
 
 
 type ActiveStatus = "all" | "active" |"completed"
+
+type ThemeType = "light" | "dark"
