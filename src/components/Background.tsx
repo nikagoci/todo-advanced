@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react";
-
-import { getWindowSize } from "../libs/window-size";
 import MobileBackgroundImg from '../assets/bg-mobile-light.jpg'
 import DesktopBackgroundImg from '../assets/bg-desktop-light.jpg'
+import useWindowResize from "../hooks/useWindowResize";
 
 const Background = () => {
-    const [windowSize, setWindowSize] = useState(getWindowSize());
-
-    useEffect(() => {
-        function handleWindowResize() {
-            setWindowSize(getWindowSize());
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
+    const [ windowSize ] = useWindowResize()
 
     return (
         <div className="h-[30%] w-full absolute bg-red-200 -z-10">
