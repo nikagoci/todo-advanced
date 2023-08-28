@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 
 const useTheme = () => {
-  const [theme, setTheme] = useState<ThemeType>("light")
+  const initialTheme: ThemeType = localStorage.getItem("theme") as ThemeType || "light"
+  const [theme, setTheme] = useState<ThemeType>(initialTheme)
 
   useEffect(() => {
+    localStorage.setItem("theme", theme)
     if (theme === 'dark') {
       document.documentElement.classList.add("dark")
     } else {
