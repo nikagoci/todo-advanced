@@ -38,7 +38,7 @@ const BottomNav = ({getActiveStatus} : BottomNavProps) => {
     }
 
     return (
-        <ul className="flex justify-center py-3 my-10 bg-white rounded-lg shadow-lg gap-x-6 md:w-[50%] md:mx-auto" >
+        <ul className="flex justify-center dark:bg-[hsl(235,24%,19%)] py-5 my-10 bg-white rounded-lg shadow-lg gap-x-6 md:w-[50%] md:mx-auto" >
             {options.map((option, index) => (
                 <li key={index} className={`${option.isActive ? "text-bright_blue" : "text-gray-400"} font-bold cursor-pointer`} onClick={() => activeChangeHandler(index)}>{option.title.slice(0, 1).toUpperCase() + option.title.slice(1) }</li>
             ))}

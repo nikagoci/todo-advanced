@@ -30,7 +30,7 @@ const App = () => {
   }
 
   return (
-    <section className="w-full">
+    <section className="w-full min-h-screen dark:bg-[hsl(235,21%,11%)] absolute -z-20">
       <Background theme={theme} />
       <div className='w-[90%] mx-auto'>
         <Navbar theme={theme} setTheme={setTheme} />

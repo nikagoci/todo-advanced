@@ -13,7 +13,7 @@ const Background = ({ theme }: BackgroundProps) => {
     const [windowSize] = useWindowResize()
 
     return (
-        <div className="h-[30%] w-full absolute bg-red-200 -z-10">
+        <div className="h-[270px] w-full absolute bg-red-200 -z-10">
             {windowSize < 768 ? (
                 <img src={theme === 'light' ? MobileBackgroundLightImg : MobileBackgroundDarkImg} alt='background' className='w-full h-full bg-top bg-auto' />
 

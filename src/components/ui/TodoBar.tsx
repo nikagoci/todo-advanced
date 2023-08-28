@@ -11,9 +11,9 @@ type TodoBarProps = {
 };
 
 const classNames = {
-  container: "flex items-center w-full px-6 py-4 bg-white rounded-md",
-  checkbox: "w-8 h-8 border border-gray-300 rounded-full cursor-pointer",
-  text: "ml-4 text-lg w-[85%]",
+  container: "flex items-center w-full px-6 py-4 bg-white rounded-md dark:bg-[hsl(235,24%,19%)]",
+  checkbox: "w-8 h-8 border border-gray-300 dark:border-[hsl(237,14%,26%)] rounded-full cursor-pointer",
+  text: "ml-4 text-md w-[85%] dark:text-white text-black bg-white dark:bg-[hsl(235,24%,19%)]",
   "checkbox-checked": "from-[hsl(192,100%,67%)] flex justify-center items-center bg-gradient-to-br to-[hsl(280,87%,65%)]"
 };
 
