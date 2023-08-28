@@ -18,13 +18,15 @@ const CreateTodo = ({ setTodos }: CreateTodoProps) => {
         e.preventDefault();
 
         if (value.length > 0) {
+            const uniqueId = uuidv4()
+
             setTodos((prev) => {
                 return [
                     ...prev,
                     {
                         title: value,
                         state: isChecked ? "completed" : "active",
-                        id: uuidv4(),
+                        id: uniqueId,
                     },
                 ];
             });

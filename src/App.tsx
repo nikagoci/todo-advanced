@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import CreateTodo from './components/CreateTodo'
 import Navbar from './components/Navbar'
@@ -7,27 +7,21 @@ import BottomNav from './components/BottomNav'
 import Background from './components/Background'
 import useTheme from './hooks/useTheme'
 
-const fakeTodos: Todo[] = [
-  {
-    title: "Do Something",
-    state: "active",
-    id: "1"
-  },
-  {
-    title: "asdasduoaouasuffoaffaafoafoaf afsuh ahsf af has f",
-    state: "completed",
-    id: "2"
-  }
-]
-
 const App = () => {
-  const [todos, setTodos] = useState(fakeTodos)
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const storedTodos = localStorage.getItem("todos");
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
   const [curActive, setCurActive] = useState<ActiveStatus>("all")
   const { theme, setTheme } = useTheme()
 
   const getActiveStatus = (active: ActiveStatus) => {
     setCurActive(active)
   }
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
   return (
     <section className="w-full min-h-screen dark:bg-[hsl(235,21%,11%)] absolute -z-20">
