@@ -1,5 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { generator } from 'random-number'
 
 import TodoBar from "./ui/TodoBar";
 
@@ -18,7 +18,7 @@ const CreateTodo = ({ setTodos }: CreateTodoProps) => {
         e.preventDefault();
 
         if (value.length > 0) {
-            const uniqueId = uuidv4()
+            const randomNum: number = generator()(1, 1000000)
 
             setTodos((prev) => {
                 return [
@@ -26,7 +26,7 @@ const CreateTodo = ({ setTodos }: CreateTodoProps) => {
                     {
                         title: value,
                         state: isChecked ? "completed" : "active",
-                        id: uniqueId,
+                        id: randomNum
                     },
                 ];
             });
