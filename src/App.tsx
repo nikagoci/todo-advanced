@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import CreateTodo from './components/CreateTodo'
 import Navbar from './components/Navbar'
@@ -6,7 +6,7 @@ import TodoList from './components/TodoList'
 import BottomNav from './components/BottomNav'
 import Background from './components/Background'
 import useTheme from './hooks/useTheme'
-import TodoContextProvider, { TodoContext } from './context/TodoContext'
+import TodoContextProvider from './context/TodoContext'
 
 const App = () => {
   const [curActive, setCurActive] = useState<ActiveStatus>("all")
