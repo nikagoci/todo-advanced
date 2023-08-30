@@ -6,7 +6,7 @@ const getTodosFromLocalStorage = () => {
     return storedTodos ? JSON.parse(storedTodos) : [];
 }
 
-type ValueType = {
+export type ValueType = {
     todos: Todo[];
     stateChange: (id: number) => void;
     createTodo: (todo: Todo) => void

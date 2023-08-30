@@ -1,35 +1,22 @@
-import { Dispatch, SetStateAction } from "react";
-
-type SetTodosType = Dispatch<SetStateAction<Todo[]>>;
-
-
-type TodoProps = {
-  setTodos: SetTodosType
-  todo: Todo;
-};
-
-export const stateChangeHandler = ({ setTodos, todo }: TodoProps) => {
-  setTodos((prev) => {
-    const updatedTodos: Todo[] = prev.map((t) => {
-      if (t.id === todo.id) {
-        return {
-          title: t.title,
-          state: t.state === "active" ? "completed" : "active",
-          id: t.id,
-        };
+export const stateChangeHandler = (todos: Todo[], id: number) => {
+  const updatedTodos = todos.map((todo: Todo) => {
+    if (todo.id === id) {
+      return {
+        ...todo,
+        state: todo.state === 'active' ? "completed" : "active"
       }
+    }
 
-      return t;
-    });
+    return todo
+  })
 
-    return updatedTodos;
-  });
+  return updatedTodos
+}
+
+export const removeTodoHandler = (todos: Todo[], id: number) => {
+  return todos.filter((todo: Todo) => todo.id !== id)
 };
 
-export const removeTodoHandler = ({ setTodos, todo }: TodoProps) => {
-  setTodos((prev) => prev.filter((t) => t.id !== todo.id));
-};
-
-export const clearCompletedTodosHandler = ({setTodos}: { setTodos: SetTodosType}) => {
-  setTodos(prev => prev.filter(todo => todo.state === 'active'))
+export const clearCompletedTodosHandler = (todos: Todo[]) => {
+  return todos.filter((todo: Todo) => todo.state !== 'completed')
 }

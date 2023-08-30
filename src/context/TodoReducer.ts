@@ -1,16 +1,10 @@
-const todoReducer = (state: any, action: any) => {
+import { clearCompletedTodosHandler, removeTodoHandler, stateChangeHandler } from "../libs/todo-crud"
+import { ValueType } from "./TodoContext"
+
+const todoReducer = (state: ValueType, action: any) => {
     switch (action.type) {
         case "STATE_CHANGE":
-            const updatedTodos = state.todos.map((todo: Todo) => {
-                if (todo.id === action.payload) {
-                    return {
-                        ...todo,
-                        state: todo.state === 'active' ? "completed" : "active"
-                    }
-                }
-
-                return todo
-            })
+            const updatedTodos = stateChangeHandler(state.todos, action.payload)
 
             return {
                 ...state,
@@ -24,14 +18,14 @@ const todoReducer = (state: any, action: any) => {
             }
 
         case "REMOVE_TODO":
-            const filteredTodos = state.todos.filter((todo: Todo) => todo.id !== action.payload)
+            const filteredTodos = removeTodoHandler(state.todos, action.payload)
 
             return {
                 ...state,
                 todos: filteredTodos
             }
         case "CLEAR_COMPLETED_TODOS":
-            const completedTodos = state.todos.filter((todo: Todo) => todo.state !== 'completed')
+            const completedTodos = clearCompletedTodosHandler(state.todos)
 
             return {
                 ...state,
