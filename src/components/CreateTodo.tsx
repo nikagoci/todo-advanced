@@ -1,13 +1,16 @@
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction, useContext, useEffect } from "react";
 import { generator } from 'random-number'
 
+import { TodoContext } from "../context/TodoContext";
 import TodoBar from "./ui/TodoBar";
 
-type CreateTodoProps = {
-    setTodos: Dispatch<SetStateAction<Todo[]>>;
-};
+const CreateTodo = () => {
+    const { createTodo, todos } = useContext(TodoContext)
 
-const CreateTodo = ({ setTodos }: CreateTodoProps) => {
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos))
+    }, [todos])
+
     const onSubmit = (
         e: FormEvent<HTMLFormElement>,
         value: string,
@@ -20,16 +23,11 @@ const CreateTodo = ({ setTodos }: CreateTodoProps) => {
         if (value.length > 0) {
             const randomNum: number = generator()(1, 1000000)
 
-            setTodos((prev) => {
-                return [
-                    ...prev,
-                    {
-                        title: value,
-                        state: isChecked ? "completed" : "active",
-                        id: randomNum
-                    },
-                ];
-            });
+            createTodo({
+                title: value,
+                state: isChecked ? "completed" : "active",
+                id: randomNum
+            })
 
             setIsChecked(false)
         }
